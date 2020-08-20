@@ -78,18 +78,14 @@ func Latest(ctx context.Context, args []string) error {
 		if *dataFlagsFormat == "tsv" {
 			sep = "\t"
 		}
-		for i, r := range obs.Sensors {
-			if i > 0 {
-				fmt.Print(sep)
-			}
-			fmt.Print(r.Component)
+		fmt.Print("timestamp" + sep + "score")
+		for _, r := range obs.Sensors {
+			fmt.Print(sep + r.Component)
 		}
 		fmt.Println()
-		for i, r := range obs.Sensors {
-			if i > 0 {
-				fmt.Print(sep)
-			}
-			fmt.Print(r.Value)
+		fmt.Printf("%v%s%v", obs.Timestamp, sep, obs.Score)
+		for _, r := range obs.Sensors {
+			fmt.Printf("%s%v", sep, r.Value)
 		}
 		fmt.Println()
 	default:
